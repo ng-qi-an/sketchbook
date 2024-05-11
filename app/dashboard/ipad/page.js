@@ -1,3 +1,4 @@
+'use client';
 import { HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import Watermark from "../components/watermark";
 import Onboarding from "../components/index/onboarding";

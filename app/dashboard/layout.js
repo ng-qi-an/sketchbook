@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext } from "react";
+import { Suspense, createContext, useContext } from "react";
 import { MainContext } from "../layout";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -18,6 +18,8 @@ export default function Layout({children}){
         router.push(generateLink(path))
     }
     return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate}}>
-        {children}
+        <Suspense>
+            {children}
+        </Suspense>
     </DashboardContext.Provider>
 }
