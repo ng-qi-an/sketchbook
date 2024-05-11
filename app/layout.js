@@ -101,7 +101,7 @@ export default function RootLayout({ children }) {
                 {loading ? 
                   <Connecting key={'loader'}/>
                 :
-                  <VStack key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
+                  <VStack spacing={0} key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
                     {children}
                   </VStack>
                 }

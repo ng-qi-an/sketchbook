@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { IoColorWand } from 'react-icons/io5'
 export default function Watermark(props){
     return <HStack as={motion.div} initial={{y: -50}} animate={{y: 0}} exit={{y: -50}} px={'20px'} py='10px' rounded={'20px'} background={props.transparent ? 'transparent' : 'white'} {...props}>
-        <HStack background={'brand.500'} justifyContent={'center'} rounded={'full'} width={'35px'} height={'35px'}> 
+        <HStack background={'brand.500'} justifyContent={'center'} rounded={'full'} width={'40px'} height={'40px'}> 
             <Icon as={IoColorWand} fontSize={'20px'} color={'white'}/>
         </HStack>
         <HStack spacing={0}>
