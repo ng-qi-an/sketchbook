@@ -1,7 +1,7 @@
 'use client';
 import "./globals.css";
 import { ChakraProvider, extendTheme, theme as defaultTheme, VStack } from "@chakra-ui/react";
-import { Suspense, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { gradients } from "./gradients";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Inter } from 'next/font/google'
@@ -101,11 +101,9 @@ export default function RootLayout({ children }) {
                 {loading ? 
                   <Connecting key={'loader'}/>
                 :
-                  <Suspense>
-                    <VStack key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
-                      {children}
-                    </VStack>
-                  </Suspense>
+                  <VStack key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
+                    {children}
+                  </VStack>
                 }
               </AnimatePresence>
             </VStack>
