@@ -4,20 +4,17 @@ export const gradients = [
         colors: ['#EB3349', '#F45C43']
     },
     {
+        colorScheme: 'green',
+        colors: ['#11998e', '#38ef7d']
+    },
+
+    {
         colorScheme: 'red',
         colors: ['#f46b45', '#eea849']
     },
     {
         colorScheme: 'green',
-        colors: ['#11998e', '#38ef7d']
-    },
-    {
-        colorScheme: 'green',
         colors: ['#00b09b', '#96c93d']
-    },
-    {
-        colorScheme: 'blue',
-        colors: ['#2193b0', '#6dd5ed']
     },
     {
         colorScheme: 'blue',
@@ -26,6 +23,11 @@ export const gradients = [
     {
         colorScheme: 'purple',
         colors: ['#8E2DE2', '#4A00E0']
+    },
+
+    {
+        colorScheme: 'blue',
+        colors: ['#2193b0', '#6dd5ed']
     },
     {
         colorScheme: 'purple',
