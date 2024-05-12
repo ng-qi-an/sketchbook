@@ -4,6 +4,7 @@ import { Heading, Image, Input, Text, VStack } from "@chakra-ui/react"
 import { useContext, useRef } from "react"
 import { IoCameraOutline } from "react-icons/io5"
 import { DashboardContext } from "../../layout"
+import { motion } from "framer-motion"
 
 export default function Uploader({mobile}){
     const inputRef = useRef()

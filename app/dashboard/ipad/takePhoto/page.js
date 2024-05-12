@@ -18,7 +18,7 @@ export default function TakePhoto(){
             <HStack height={'100%'} width={'100%'} spacing={'20px'}>
                 <Uploader/>
             </HStack>
-            <Button rightIcon={<Icon as={IoArrowForward}/>} isDisabled={!ctx.photo} colorScheme={'brand'} minH='48px' width={'100%'} size={'lg'} rounded="full">Continue</Button>
+            <Button onClick={()=> ctx.navigate('/editPhoto')} rightIcon={<Icon as={IoArrowForward}/>} isDisabled={!ctx.photo} colorScheme={'brand'} minH='48px' width={'100%'} size={'lg'} rounded="full">Continue</Button>
         </VStack>
     </>
 }
