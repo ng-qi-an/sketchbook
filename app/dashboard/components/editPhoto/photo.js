@@ -7,7 +7,7 @@ import { DashboardContext } from "../../layout"
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { IoInformationCircle } from "react-icons/io5";
 
-export default function Photo({canvasRef, strokeColor, showPhoto}){
+export default function Photo({canvasRef, strokeColor, showPhoto, lines}){
     const ctx = useContext(DashboardContext)
     const toast = useToast()
     useEffect(()=>{
@@ -28,7 +28,7 @@ export default function Photo({canvasRef, strokeColor, showPhoto}){
             event.preventDefault();
         }, false);
     }, [])
-    return <VStack opacity={showPhoto ? 1 : 0} transition={'linear all  0.3s'} position={'relative'} spacing={0}>
+    return <VStack id={'photoDiv'} opacity={showPhoto ? 1 : 0} transition={'linear all  0.3s'} position={'relative'} spacing={0}>
         <VStack position={'relative'} rounded={'20px'} overflow={'hidden'} background={'white'} p={'30px'}>
             {showPhoto ?
                 <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'} roundedBottom={0}/>
@@ -36,8 +36,8 @@ export default function Photo({canvasRef, strokeColor, showPhoto}){
                 <VStack minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'}/>
             }
             <VStack px={'10px'} w={'100%'}>
-                <HStack w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'}/>
-                <HStack w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'} mb={'20px'}/>
+                <HStack opacity={lines ? 1 : 0} w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'}/>
+                <HStack opacity={lines ? 1 : 0} w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'} mb={'20px'}/>
             </VStack>
             <Text position={'absolute'} left={'40px'} bottom={'20px'} fontSize={'12px'} opacity={0.85}>May 18 2024 | SJI Open House</Text>
         </VStack>

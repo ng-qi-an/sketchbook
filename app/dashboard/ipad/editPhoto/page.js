@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, HStack, VStack } from "@chakra-ui/react";
+import { Button, HStack, Spacer, VStack } from "@chakra-ui/react";
 import Photo from "../../components/editPhoto/photo";
 import Stepper from "../../components/stepper";
 import Watermark from "../../components/watermark";
@@ -10,10 +10,13 @@ import CropPhoto from "../../components/editPhoto/cropPhoto";
 import PhotoControls from "../../components/editPhoto/photoControls";
 import CropButton from "../../components/editPhoto/cropButton";
 import { AnimatePresence, motion } from "framer-motion";
+import ContinueButton from "../../components/editPhoto/ContinueButton";
+import LinesButton from "../../components/editPhoto/linesButton";
 
 export default function Page(){
     const canvasRef = useRef()
     const [strokeColor, setStrokeColor] = useState("var(--chakra-colors-black)")
+    const [lines, setLines] = useState(true)
     const [crop, setCrop] = useState(false)
     const [cropper, setCropper] = useState(null)
     return <>
@@ -21,10 +24,14 @@ export default function Page(){
     <Stepper step={2} title={'Edit your photo'} mobile={false}/>
     <HStack h={'25px'}/>
     <HStack alignItems={'flex-start'}>
-        <CropButton crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper}/>
+        <VStack h={'480px'}>
+            <CropButton crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper}/>
+            <Spacer/>
+            <LinesButton crop={crop} lines={lines} setLines={setLines}/>
+        </VStack>
         <VStack position={'relative'} spacing={0}>
             {crop && <CropPhoto cropper={cropper} setCropper={setCropper}/>}
-            <Photo canvasRef={canvasRef} strokeColor={strokeColor} showPhoto={!crop}/>
+            <Photo lines={lines} setLines={setLines} canvasRef={canvasRef} strokeColor={strokeColor} showPhoto={!crop}/>
         </VStack>
         <AnimatePresence mode="wait">
             {crop ?
@@ -38,8 +45,6 @@ export default function Page(){
             }
         </AnimatePresence>
     </HStack>
-    <Button opacity={crop ? 0 : 1} pointerEvents={crop ? "none" : "all"} size={'lg'} bg={'white'} color={'brand.500'} rounded={'full'} mt={'10px'} w={'300px'}>
-        Continue
-    </Button>
+    <ContinueButton crop={crop}/>
     </>
 }

@@ -10,7 +10,9 @@ export default function Layout({children}){
     const ctx = useContext(MainContext)
     const searchParams = useSearchParams()
     const router = useRouter()
-
+    
+    const [exportCanvas, setExportCanvas] = useState(null)
+    const [exportPhoto, setExportPhoto] = useState("")
     const [photo, setPhoto] = useState("")
 
     function generateLink(path){
@@ -19,7 +21,7 @@ export default function Layout({children}){
     function navigate(path){
         router.push(generateLink(path))
     }
-    return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate, photo, setPhoto}}>
+    return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate, photo, setPhoto, exportPhoto, setExportPhoto, exportCanvas, setExportCanvas}}>
         {children}
     </DashboardContext.Provider>
 }
