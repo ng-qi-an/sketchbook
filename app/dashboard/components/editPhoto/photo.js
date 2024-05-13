@@ -1,31 +1,52 @@
 'use client';
 
-import { Divider, HStack, Image, VStack } from "@chakra-ui/react"
+import { Divider, HStack, Icon, Image, Text, VStack, useToast } from "@chakra-ui/react"
 import { motion } from "framer-motion"
 import { useContext, useEffect } from "react"
 import { DashboardContext } from "../../layout"
 import { ReactSketchCanvas } from "react-sketch-canvas";
+import { IoInformationCircle } from "react-icons/io5";
 
-export default function Photo({canvasRef, strokeColor}){
+export default function Photo({canvasRef, strokeColor, showPhoto}){
     const ctx = useContext(DashboardContext)
+    const toast = useToast()
+    useEffect(()=>{
+        toast({
+            duration: 3000,
+            render: () => (
+                <HStack onClick={()=>{
+                    toast.closeAll()
+                }} bg={'white'} p={'15px 25px'} rounded={'full'}>
+                    <Icon fontSize={'25px'} color={'brand.500'} as={IoInformationCircle}/>
+                    <Text fontWeight={'medium'}>Tap on the pen when selected to change colors</Text>
+                </HStack>
+            )
+        })
+    }, [])
     useEffect(()=>{
         document.getElementById("canvasDrawing").addEventListener('touchstart', function( event ) { 
             event.preventDefault();
         }, false);
     }, [])
-    return <VStack position={'relative'} spacing={0}>
-        <VStack rounded={'20px'} overflow={'hidden'} background={'white'} p={'30px'}>
-            <Image backgroundSize={'cover'} src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={'400px'} maxH="400px" justifyContent={'center'} rounded={'20px'} minWidth={'300px'} maxW={'300px'}>
-            </Image>
-            <HStack w={'100%'} h={'1px'} bg={'blackAlpha.300'} mt={'30px'}/>
-            <HStack w={'100%'} h={'1px'} bg={'blackAlpha.300'} mt={'30px'} mb={'10px'}/>
+    return <VStack opacity={showPhoto ? 1 : 0} transition={'linear all  0.3s'} position={'relative'} spacing={0}>
+        <VStack position={'relative'} rounded={'20px'} overflow={'hidden'} background={'white'} p={'30px'}>
+            {showPhoto ?
+                <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'} roundedBottom={0}/>
+            :
+                <VStack minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'}/>
+            }
+            <VStack px={'10px'} w={'100%'}>
+                <HStack w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'}/>
+                <HStack w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'} mb={'20px'}/>
+            </VStack>
+            <Text position={'absolute'} left={'40px'} bottom={'20px'} fontSize={'12px'} opacity={0.85}>May 18 2024 | SJI Open House</Text>
         </VStack>
         <ReactSketchCanvas
             id="canvasDrawing"
             ref={canvasRef}
             style={{position: 'absolute', top: 0, left: 0, zIndex: 10}}
-            width="100%"
-            height="100%"
+            width="300px"
+            height="480px"
             canvasColor="transparent"
             strokeColor={strokeColor}
             eraserWidth={28}
