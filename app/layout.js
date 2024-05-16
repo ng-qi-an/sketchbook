@@ -1,6 +1,6 @@
 'use client';
 import "./globals.css";
-import { ChakraProvider, extendTheme, theme as defaultTheme, VStack } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, theme as defaultTheme, VStack, Image } from "@chakra-ui/react";
 import { createContext, useEffect, useState } from "react";
 import { gradients } from "./gradients";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
@@ -23,14 +23,14 @@ export default function RootLayout({ children }) {
   const router = useRouter()
   const pathname = usePathname()
 
-  const [colorScheme, setColorScheme] = useState("gray")
+  const [colorScheme, setColorScheme] = useState("green")
   const [loading, setLoading] = useState(true)
   const [socket, setSocket] = useState(false)
   const [disconnected, setDisconnected] = useState(false)
-  const [gradient, setGradient] = useState({
-      colorScheme: 'gray',
-      colors: ['#fff', '#fff']
-  })
+  // const [gradient, setGradient] = useState({
+  //     colorScheme: 'gray',
+  //     colors: ['#fff', '#fff']
+  // })
   const theme = extendTheme({
     colors: {
       brand: {
@@ -49,20 +49,24 @@ export default function RootLayout({ children }) {
   })
 
   useEffect(()=>{
-    router.replace(`/?${searchParams.toString()}`)
-    function rand(items) {
-      // "|" for a kinda "int div"
-      return items[items.length * Math.random() | 0];
-    }
-    const selectedGradient = rand(gradients)
-    setGradient(selectedGradient)
-    setColorScheme(selectedGradient.colorScheme)
+    // function rand(items) {
+    //   // "|" for a kinda "int div"
+    //   return items[items.length * Math.random() | 0];
+    // }
+    // const selectedGradient = rand(gradients)
+    // setGradient(selectedGradient)
+    // setColorScheme(selectedGradient.colorScheme)
     const iosocket = io(`https://sketchbook.patstify.com`)
     iosocket.once('connect', ()=>{
       setSocket(iosocket)
       console.log('[SOCKET] Connected to the server')
-      const device = searchParams.get('device') || 'phone'
-      router.replace(`/dashboard/${device}?${searchParams.toString()}`)
+      if (pathname == '/dashboard/phone/download'){
+        setLoading(false)
+      } else {
+        router.replace(`/?${searchParams.toString()}`)
+        const device = searchParams.get('device') || 'phone'
+        router.replace(`/dashboard/${device}?${searchParams.toString()}`)
+      }
     })
   }, [])
   useEffect(()=>{
@@ -92,16 +96,19 @@ export default function RootLayout({ children }) {
   }, [socket])
   return (
     <html lang="en">
-      <body className={inter.variable} style={{backgroundImage: `linear-gradient(45deg, ${gradient.colors.join(",")})`, backgroundPosition: 'center'}}>
+      <body className={inter.variable} style={{backgroundImage: `linear-gradient(45deg, ${theme.colors.brand[500]}, ${theme.colors.brand[400]})`, backgroundPosition: 'center'}}>
         <ChakraProvider theme={theme}>
           <MainContext.Provider value={{socket}}>
-            <VStack width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
-              <AnimatePresence mode='wait'>
+            <Image src={"/SjiBackground.png"} height={'100vh'} width={'100%'} objectFit={'cover'} objectPosition={'top-right'}/>
+            <VStack position={'absolute'} top={0} left={0} zIndex={10} width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
+              <AnimatePresence mode="wait">
                 {disconnected && <Disconnected key={"disconnected"}/>}
+              </AnimatePresence>
+              <AnimatePresence mode='wait'>
                 {loading ? 
                   <Connecting key={'loader'}/>
                 :
-                  <VStack spacing={0} key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
+                  <VStack padding={pathname.startsWith("/dashboard/phone") && '0px 20px'} spacing={0} key="content" width={'100%'} height={'100vh'} overflow={'auto'} justifyContent={'center'} alignItems={'center'}>
                     {children}
                   </VStack>
                 }
