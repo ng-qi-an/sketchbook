@@ -21,30 +21,30 @@ export default function Page(){
     const [cropper, setCropper] = useState(null)
     return <>
     <Watermark position="fixed" top={"20px"} left={"30px"}/>
-    <Stepper step={2} title={'Edit your photo'} mobile={false}/>
+    <Stepper step={2} title={'Edit your photo'} mobile={true}/>
     <HStack h={'25px'}/>
-    <HStack alignItems={'flex-start'}>
-        <VStack h={'400px'}>
+    <VStack alignItems={'flex-start'}>
+        <HStack>
             <CropButton crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper}/>
             <Spacer/>
             <LinesButton crop={crop} lines={lines} setLines={setLines}/>
-        </VStack>
+        </HStack>
         <VStack position={'relative'} spacing={0}>
             {crop && <CropPhoto cropper={cropper} setCropper={setCropper}/>}
             <Photo lines={lines} setLines={setLines} canvasRef={canvasRef} strokeColor={strokeColor} showPhoto={!crop}/>
         </VStack>
         <AnimatePresence mode="wait">
             {crop ?
-                <VStack key={'photoControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}  bg={'white'} p={'5px 5px'} rounded={'full'}>
+                <HStack key={'photoControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}  bg={'white'} p={'5px 5px'} rounded={'full'}>
                     <PhotoControls key={'photoControls'} cropper={cropper} setCropper={setCropper} crop={crop} setCrop={setCrop} />
-                </VStack>
+                </HStack>
             :
-                <VStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} p={'5px 5px'} rounded={'full'}>
+                <HStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} p={'5px 5px'} rounded={'full'}>
                 <CanvasControls  canvasRef={canvasRef} setStrokeColor={setStrokeColor} strokeColor={strokeColor}/>
-                </VStack>
+                </HStack>
             }
         </AnimatePresence>
-    </HStack>
+    </VStack>
     <ContinueButton crop={crop}/>
     </>
 }

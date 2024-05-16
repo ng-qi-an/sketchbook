@@ -7,7 +7,7 @@ import { DashboardContext } from "../../layout"
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { IoInformationCircle } from "react-icons/io5";
 
-export default function Photo({canvasRef, strokeColor, showPhoto, lines}){
+export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile}){
     const ctx = useContext(DashboardContext)
     const toast = useToast()
     useEffect(()=>{
@@ -31,9 +31,9 @@ export default function Photo({canvasRef, strokeColor, showPhoto, lines}){
     return <VStack id={'photoDiv'} opacity={showPhoto ? 1 : 0} transition={'linear all  0.3s'} position={'relative'} spacing={0}>
         <VStack position={'relative'} rounded={'20px'} overflow={'hidden'} background={'white'} p={'30px'}>
             {showPhoto ?
-                <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'} roundedBottom={0}/>
+                <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={!mobile ? '240px' : '320px'} maxH={!mobile ? '240px' : '320px'} minWidth={mobile ? '240px' : '320px'} maxW={mobile ? '240px' : '320px'} justifyContent={'center'} rounded={'20px'} roundedBottom={0}/>
             :
-                <VStack minHeight={'320px'} maxH="320px" justifyContent={'center'} rounded={'20px'} minWidth={'240px'} maxW={'240px'}/>
+                <VStack minHeight={!mobile ? '240px' : '320px'} maxH={!mobile ? '240px' : '320px'} minWidth={mobile ? '240px' : '320px'} maxW={mobile ? '240px' : '320px'} justifyContent={'center'} rounded={'20px'}/>
             }
             <VStack px={'10px'} w={'100%'}>
                 <HStack opacity={lines ? 1 : 0} w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'}/>
@@ -45,8 +45,8 @@ export default function Photo({canvasRef, strokeColor, showPhoto, lines}){
             id="canvasDrawing"
             ref={canvasRef}
             style={{position: 'absolute', top: 0, left: 0, zIndex: 10}}
-            width="300px"
-            height="480px"
+            width={mobile ? "300px" : '380px'}
+            height={mobile ? "480px" : '400px'}
             canvasColor="transparent"
             strokeColor={strokeColor}
             eraserWidth={28}

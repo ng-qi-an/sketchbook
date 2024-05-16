@@ -16,7 +16,7 @@ export default function Uploader({mobile}){
     </VStack>
     <VStack onClick={()=>{
         inputRef.current.click()
-    }} position={'relative'} _active={{transform: "scale(0.95)", borderColor: 'brand.400'}} backgroundSize={'cover'} backgroundImage={ctx.photo && `url(${ctx.photo})`} backgroundPosition={"center"} backgroundRepeat={"no-repeat"} transition={'ease-in-out all 0.1s'} minHeight={'240px'} maxH="240px" justifyContent={'center'} rounded={'20px'} minWidth={'180px'} maxW={'180px'} border={'dashed 1px'} borderColor={ctx.photo ? 'transparent' : 'blackAlpha.300'}>
+    }} position={'relative'} _active={{transform: "scale(0.95)", borderColor: 'brand.400'}} backgroundSize={'cover'} backgroundImage={ctx.photo && `url(${ctx.photo})`} backgroundPosition={"center"} backgroundRepeat={"no-repeat"} transition={'ease-in-out all 0.1s'} minHeight={mobile ? '240px' : '180px'} maxH={mobile ? '240px' : '180px'} minWidth={!mobile ? '240px' : '180px'} maxW={!mobile ? '240px' : '180px'}  justifyContent={'center'} rounded={'20px'} border={'dashed 1px'} borderColor={ctx.photo ? 'transparent' : 'blackAlpha.300'}>
         {!ctx.photo && <IoCameraOutline fontSize={'50px'}/>}
         <Input onChange={(e)=>{
             if (e.target.files && e.target.files[0]) {

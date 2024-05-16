@@ -96,6 +96,11 @@ export default function RootLayout({ children }) {
   }, [socket])
   return (
     <html lang="en">
+      <head>
+        <title>Sketchbook</title>
+        <link rel="icon" href="/icon512_rounded.png" />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className={inter.variable} style={{backgroundImage: `linear-gradient(45deg, ${theme.colors.brand[500]}, ${theme.colors.brand[400]})`, backgroundPosition: 'center'}}>
         <ChakraProvider theme={theme}>
           <MainContext.Provider value={{socket}}>
