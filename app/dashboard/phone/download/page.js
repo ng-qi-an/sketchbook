@@ -34,7 +34,7 @@ export default function Download(){
                     Save to your phone
                 </Text>
                 <Text textAlign={'center'}>
-                    Press the Download button to save it to your phone. You can share this page with others.
+                    Press the Download button to save it to your phone. You can share this photo to others.
                 </Text>
                 <Button onClick={()=> forceDownload(`https://sketchbook.patstify.com/getPhoto/${searchQuery.get('photoID')}`, searchQuery.get('photoID'))} w={'full'} size={'lg'} colorScheme={'brand'} rounded={'full'}>Download</Button>
             </VStack>

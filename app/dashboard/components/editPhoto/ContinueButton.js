@@ -11,6 +11,7 @@ export default function ContinueButton({crop}){
         setLoading(true)
         html2canvas(document.getElementById("photoDiv"), {backgroundColor: 'transparent'}).then(function(canvas) {
             canvas.toBlob((blob)=>{
+                ctx.setExportBlob(blob)
                 const url = URL.createObjectURL(blob);
                 ctx.setExportPhoto(url)
                 ctx.navigate('/exportPhoto')

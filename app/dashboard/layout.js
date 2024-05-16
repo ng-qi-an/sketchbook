@@ -14,6 +14,7 @@ export default function Layout({children}){
     const [exportCanvas, setExportCanvas] = useState(null)
     const [exportLink, setExportLink]  = useState("")
     const [exportPhoto, setExportPhoto] = useState("")
+    const [exportBlob, setExportBlob] = useState(null)
     const [photo, setPhoto] = useState("")
 
     function generateLink(path){
@@ -22,7 +23,7 @@ export default function Layout({children}){
     function navigate(path){
         router.push(generateLink(path))
     }
-    return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate, photo, setPhoto, exportPhoto, setExportPhoto, exportCanvas, setExportCanvas, exportLink, setExportLink}}>
+    return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate, photo, setPhoto, exportPhoto, setExportPhoto, exportCanvas, setExportCanvas, exportLink, setExportLink, exportBlob, setExportBlob}}>
         {children}
     </DashboardContext.Provider>
 }
