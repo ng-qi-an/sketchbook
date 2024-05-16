@@ -12,7 +12,7 @@ export default function Uploader({mobile}){
     return <>
     <VStack alignItems={mobile ? 'center' : 'start'} width={'100%'}>
         <Text fontSize={'larger'} fontWeight={'semibold'} textAlign={mobile && 'center'}>Take your photo</Text>
-        <Text color={'blackAlpha.700'} textAlign={mobile && 'center'}>Tap the button on the right to take a photo</Text>
+        <Text color={'blackAlpha.700'} textAlign={mobile && 'center'}>Tap the button on the {mobile ? 'top' : 'right'} to take a photo</Text>
     </VStack>
     <VStack onClick={()=>{
         inputRef.current.click()

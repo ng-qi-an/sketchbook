@@ -29,7 +29,7 @@ export default function Page(){
                     <VStack maxW={'175px'} spacing={0}>
                         <QRCodeSVG style={{minWidth: '175px', maxWidth: '175px', minHeight: '175px'}} value={`http://10.72.1.211:3000/dashboard/phone/download?photoID=${ctx.exportLink}`} size={200} bgColor="transparent" fgColor="var(--chakra-colors-brand-500)" />
                         <Button leftIcon={<Icon as={IoLogoApple}/>} w={'full'} onClick={()=> {
-                            var file = new File([ctx.exportBlob], ctx.exportLink);
+                            var file = new File([ctx.exportBlob], `${ctx.exportLink}.png`, {type: ctx.exportBlob.type});
                             let shareData = {files: [file]}
                             if (navigator.canShare(shareData)){
                                 navigator.share(shareData).then(()=> {
