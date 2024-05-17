@@ -1,27 +1,29 @@
 'use client';
 import { Button, Circle, Icon, Text, VStack } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoArrowDown } from "react-icons/io5";
 
 export default function Download(){
     const searchQuery = useSearchParams()
-    
-    function forceDownload(url, fileName){
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.responseType = "blob";
-        xhr.onload = function(){
-            var urlCreator = window.URL || window.webkitURL;
-            var imageUrl = urlCreator.createObjectURL(this.response);
-            var tag = document.createElement('a');
-            tag.href = imageUrl;
-            tag.download = fileName;
-            document.body.appendChild(tag);
-            tag.click();
-            document.body.removeChild(tag);
-        }
-        xhr.send();
+    const [imageBlob, setImageBlob] = useState(null)
+
+    useEffect(()=>{
+        fetch(`https://sketchbook.patstify.com/getPhoto/${searchQuery.get('photoID')}`)
+            .then(response => response.blob())
+            .then(blob => {
+                setImageBlob(blob)
+            })
+    }, [])
+    function forceDownload(blob, fileName){
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(blob);
+        var tag = document.createElement('a');
+        tag.href = imageUrl;
+        tag.download = fileName;
+        document.body.appendChild(tag);
+        tag.click();
+        document.body.removeChild(tag);
     }
     return <>
         <VStack spacing={'30px'} width={'full'} bg={'white'} px={40} rounded={'20px'} p={'40px'}>
@@ -36,7 +38,24 @@ export default function Download(){
                 <Text textAlign={'center'}>
                     Press the Download button to save it to your phone. You can share this photo to others.
                 </Text>
-                <Button onClick={()=> forceDownload(`https://sketchbook.patstify.com/getPhoto/${searchQuery.get('photoID')}`, searchQuery.get('photoID'))} w={'full'} size={'lg'} colorScheme={'brand'} rounded={'full'}>Download</Button>
+                <Button onClick={()=> {
+                    var file = new File([imageBlob], `${searchQuery.get('photoID')}.png`, {type: imageBlob.type});
+                    let shareData = {files: [file]}
+                    if (navigator.canShare(shareData)){
+                        navigator.share(shareData).then(()=> {
+                            console.log('Shared')
+                        })
+                    } else {
+                        toast({
+                            title: "Share not supported",
+                            description: "Your device does not support sharing files",
+                            status: "error",
+                            duration: 5000,
+                            isClosable: true
+                        })
+                        forceDownload(imageBlob, searchQuery.get('photoID'))
+                    }
+                }} w={'full'} size={'lg'} colorScheme={'brand'} rounded={'full'}>Download</Button>
             </VStack>
         </VStack>
     </>

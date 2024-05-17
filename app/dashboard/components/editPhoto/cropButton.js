@@ -5,7 +5,7 @@ import { DashboardContext } from "../../layout";
 
 export default function CropButton({crop, setCrop, cropper, setCropper}){
     const ctx = useContext(DashboardContext)
-    return <IconButton w={'58px'} h={'58px'} _hover={{}} onClick={()=> {
+    return <IconButton w={'48px'} h={'48px'} _hover={{}} onClick={()=> {
         if (crop){
             cropper.getCroppedCanvas().toBlob((blob) => {
                 const url = URL.createObjectURL(blob);

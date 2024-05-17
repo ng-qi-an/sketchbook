@@ -12,10 +12,13 @@ import CropButton from "../../components/editPhoto/cropButton";
 import { AnimatePresence, motion } from "framer-motion";
 import ContinueButton from "../../components/editPhoto/ContinueButton";
 import LinesButton from "../../components/editPhoto/linesButton";
+import CanvasOptions from "../../components/editPhoto/canvasOptions";
 
 export default function Page(){
     const canvasRef = useRef()
     const [strokeColor, setStrokeColor] = useState("var(--chakra-colors-black)")
+    const [eraseMode, setEraseMode] = useState(false)
+    const [eraserWidth, setEraserWidth] = useState(25)
     const [lines, setLines] = useState(true)
     const [crop, setCrop] = useState(false)
     const [cropper, setCropper] = useState(null)
@@ -25,13 +28,14 @@ export default function Page(){
     <HStack h={'25px'}/>
     <HStack alignItems={'flex-start'}>
         <VStack h={'400px'}>
-            <CropButton crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper}/>
+            <VStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} p={'5px 5px'} rounded={'full'}>
+                <CanvasControls eraseMode={eraseMode} setEraseMode={setEraseMode} canvasRef={canvasRef} setStrokeColor={setStrokeColor} strokeColor={strokeColor} crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper} lines={lines} setLines={setLines}/>
+            </VStack>
             <Spacer/>
-            <LinesButton crop={crop} lines={lines} setLines={setLines}/>
         </VStack>
         <VStack position={'relative'} spacing={0}>
             {crop && <CropPhoto cropper={cropper} setCropper={setCropper}/>}
-            <Photo lines={lines} setLines={setLines} canvasRef={canvasRef} strokeColor={strokeColor} showPhoto={!crop}/>
+            <Photo eraserWidth={eraserWidth} setEraserWidth={setEraserWidth} lines={lines} setLines={setLines} canvasRef={canvasRef} strokeColor={strokeColor} showPhoto={!crop}/>
         </VStack>
         <AnimatePresence mode="wait">
             {crop ?
@@ -40,7 +44,7 @@ export default function Page(){
                 </VStack>
             :
                 <VStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} p={'5px 5px'} rounded={'full'}>
-                <CanvasControls  canvasRef={canvasRef} setStrokeColor={setStrokeColor} strokeColor={strokeColor}/>
+                    <CanvasOptions setEraserWidth={setEraserWidth} eraserWidth={eraserWidth}  eraseMode={eraseMode} setEraseMode={setEraseMode} canvasRef={canvasRef} setStrokeColor={setStrokeColor} strokeColor={strokeColor} crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper} lines={lines} setLines={setLines}/>
                 </VStack>
             }
         </AnimatePresence>

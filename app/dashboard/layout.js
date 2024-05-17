@@ -23,6 +23,7 @@ export default function Layout({children}){
     function navigate(path){
         router.push(generateLink(path))
     }
+    
     return <DashboardContext.Provider value={{socket: ctx.socket, generateLink, navigate, photo, setPhoto, exportPhoto, setExportPhoto, exportCanvas, setExportCanvas, exportLink, setExportLink, exportBlob, setExportBlob}}>
         {children}
     </DashboardContext.Provider>

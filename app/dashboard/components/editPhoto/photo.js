@@ -7,7 +7,7 @@ import { DashboardContext } from "../../layout"
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import { IoInformationCircle } from "react-icons/io5";
 
-export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile}){
+export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile, eraserWidth, setEraserWidth}){
     const ctx = useContext(DashboardContext)
     const toast = useToast()
     useEffect(()=>{
@@ -49,7 +49,7 @@ export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile}
             height={mobile ? "480px" : '400px'}
             canvasColor="transparent"
             strokeColor={strokeColor}
-            eraserWidth={28}
+            eraserWidth={eraserWidth}
         />
     </VStack>
 }

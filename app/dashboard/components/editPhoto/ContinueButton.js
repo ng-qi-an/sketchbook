@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { DashboardContext } from "../../layout";
 import { useRouter } from "next/navigation";
 
-export default function ContinueButton({crop}){
+export default function ContinueButton({crop, mobile}){
     const [loading, setLoading] = useState(false)
     const ctx = useContext(DashboardContext)
     return <Button onClick={()=>{
@@ -18,7 +18,7 @@ export default function ContinueButton({crop}){
 
             })
         });
-    }} opacity={crop ? 0 : 1} isLoading={loading} pointerEvents={crop ? "none" : "all"} size={'lg'} bg={'white'} color={'brand.500'} rounded={'full'} mt={'10px'} w={'300px'}>
+    }} opacity={crop ? 0 : 1} isLoading={loading} pointerEvents={crop ? "none" : "all"} size={'lg'} bg={'white'} color={'brand.500'} rounded={'full'} mt={'10px'} w={mobile ? '300px' : '380px'}>
         Continue
     </Button>
 }
