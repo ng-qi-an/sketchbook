@@ -43,7 +43,7 @@ export default function Page(){
                     <PhotoControls key={'photoControls'} cropper={cropper} setCropper={setCropper} crop={crop} setCrop={setCrop} />
                 </VStack>
             :
-                <VStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} p={'5px 5px'} rounded={'full'}>
+                <VStack key={'canvasControls'} as={motion.div} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} bg={'white'} minW={'58px'} p={'15px 5px'} spacing={0} rounded={'full'}>
                     <CanvasOptions setEraserWidth={setEraserWidth} eraserWidth={eraserWidth}  eraseMode={eraseMode} setEraseMode={setEraseMode} canvasRef={canvasRef} setStrokeColor={setStrokeColor} strokeColor={strokeColor} crop={crop} setCrop={setCrop} cropper={cropper} setCropper={setCropper} lines={lines} setLines={setLines}/>
                 </VStack>
             }
