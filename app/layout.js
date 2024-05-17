@@ -45,7 +45,25 @@ export default function RootLayout({ children }) {
         800: defaultTheme.colors[colorScheme][800],
         900: defaultTheme.colors[colorScheme][900],
       }
-    }
+    },
+    components: {
+      Button: {
+        // 1. We can update the base styles
+        baseStyle: {
+          _active: {
+            transform: "scale(0.95)",
+          }
+        },
+      },
+      IconButton: {
+        // 1. We can update the base styles
+        baseStyle: {
+          _active: {
+            transform: "scale(0.5)",
+          }
+        },
+      },
+    },
   })
 
   useEffect(()=>{

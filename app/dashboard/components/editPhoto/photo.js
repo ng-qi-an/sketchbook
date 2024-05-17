@@ -31,7 +31,7 @@ export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile,
     return <VStack id={'photoDiv'} opacity={showPhoto ? 1 : 0} transition={'linear all  0.3s'} position={'relative'} spacing={0}>
         <VStack position={'relative'} rounded={'20px'} overflow={'hidden'} background={'white'} p={'30px'}>
             {showPhoto ?
-                <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={!mobile ? '240px' : '320px'} maxH={!mobile ? '240px' : '320px'} minWidth={mobile ? '240px' : '320px'} maxW={mobile ? '240px' : '320px'} justifyContent={'center'} rounded={'20px'} roundedBottom={0}/>
+                <Image as={motion.img} key={'photo'} layoutId="photo" src={ctx.photo} objectFit={'cover'} objectPosition={'center'} minHeight={!mobile ? '240px' : '320px'} maxH={!mobile ? '240px' : '320px'} minWidth={mobile ? '240px' : '320px'} maxW={mobile ? '240px' : '320px'} justifyContent={'center'} overflow={'hidden'} rounded={'20px'}/>
             :
                 <VStack minHeight={!mobile ? '240px' : '320px'} maxH={!mobile ? '240px' : '320px'} minWidth={mobile ? '240px' : '320px'} maxW={mobile ? '240px' : '320px'} justifyContent={'center'} rounded={'20px'}/>
             }

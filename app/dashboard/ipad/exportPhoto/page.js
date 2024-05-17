@@ -45,6 +45,7 @@ export default function Page(){
                                 })
                             }
                         }}>Airdrop</Button>
+                        <Button mt={'10px'} colorScheme={'brand'} onClick={()=> window.location.reload()} w={'full'}>Make another</Button>
                     </VStack>
                 </>
             :

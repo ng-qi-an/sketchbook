@@ -23,7 +23,7 @@ export default function ExportController({exportStep, setExportStep}){
                 reader.onloadend = function() {
                     var base64data = reader.result;
                     base64data = base64data.replace("data:image/png;base64,", "")
-                    ctx.socket.emit("uploadPhoto", {photo: base64data})
+                    ctx.socket.emit("uploadPhoto", {photo: base64data, givenConsent: ctx.givenConsent})
                 }
             })
         } else if (exportStep == 3){

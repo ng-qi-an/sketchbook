@@ -85,7 +85,7 @@ export default function Page(){
                     </HStack>
                 </Center>
             </Center>
-            <Wrap spacing={'15px'} h={'full'} flexDirection={'row-reverse'}>
+            <Wrap spacing={'15px'} h={'full'}>
                 {photos.map((photo, index)=>{
                     return <WrapItem rounded={'lg'}>
                         <Image src={`https://sketchbook.patstify.com/getDirectPhoto/${photo}?password=${password}`} width={'200px'}/>
