@@ -19,7 +19,7 @@ export default function Page(){
     const router = useRouter()
     useEffect(()=>{
         if (exportStep == 5){
-            router.push(`http://10.72.1.211:3000/dashboard/phone/download?photoID=${ctx.exportLink}`)
+            router.push(`https://sketchbook-sji.vercel.app/dashboard/phone/download?photoID=${ctx.exportLink}`)
         }
     }, [exportStep])
     return <>

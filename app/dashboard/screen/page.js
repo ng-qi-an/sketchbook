@@ -18,6 +18,10 @@ export default function Page(){
         setWidth(Math.floor(maxWidth / (200 + 15)) * (200 + 15) - 15)
         onOpen()
 
+        ctx.socket.on("updateScreen", (data)=>{
+            setPhotos(data.photos)
+        })
+
         ctx.socket.on("connectScreen", (data)=>{
             if (data.status == 'success'){
                 setPhotos(data.photos)
