@@ -88,7 +88,7 @@ export default function Page(){
             <Wrap spacing={'15px'} h={'full'}>
                 {photos.map((photo, index)=>{
                     return <WrapItem rounded={'lg'}>
-                        <Image src={`https://sketchbook.patstify.com/getDirectPhoto/${photo}?password=${password}`} width={'200px'}/>
+                        <Image src={`https://api.ngqian.dev/sketchbook/getDirectPhoto/${photo}?password=${password}`} width={'200px'}/>
                     </WrapItem>
                 })}
             </Wrap>

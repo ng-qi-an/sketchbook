@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
     // const selectedGradient = rand(gradients)
     // setGradient(selectedGradient)
     // setColorScheme(selectedGradient.colorScheme)
-    const iosocket = io(`https://sketchbook-api.ngqian.dev`)
+    const iosocket = io(`https://api.ngqian.dev`, {path: "/sketchbook/socket.io"})
     iosocket.once('connect', ()=>{
       setSocket(iosocket)
       console.log('[SOCKET] Connected to the server')

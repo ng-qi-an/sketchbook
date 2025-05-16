@@ -39,7 +39,7 @@ export default function Photo({canvasRef, strokeColor, showPhoto, lines, mobile,
                 <HStack opacity={lines ? 1 : 0} w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'}/>
                 <HStack opacity={lines ? 1 : 0} w={'100%'} h={'2px'} bg={'blackAlpha.300'} mt={'30px'} mb={'20px'}/>
             </VStack>
-            <Text position={'absolute'} left={'40px'} bottom={'20px'} fontSize={'12px'} opacity={0.85}>May 18 2024 | SJI Open House</Text>
+            <Text position={'absolute'} left={'40px'} bottom={'20px'} fontSize={'12px'} opacity={0.85}>May 16 2025 | SJI Open House</Text>
         </VStack>
         <ReactSketchCanvas
             id="canvasDrawing"
