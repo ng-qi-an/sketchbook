@@ -87,7 +87,7 @@ export default function Page(){
             </Center>
             <Wrap spacing={'15px'} h={'full'}>
                 {photos.map((photo, index)=>{
-                    return <WrapItem rounded={'lg'}>
+                    return <WrapItem rounded={'lg'} border={'solid 2px'} borderColor={'gray.300'} key={index}>
                         <Image src={`https://api.ngqian.dev/sketchbook/getDirectPhoto/${photo}?password=${password}`} width={'200px'}/>
                     </WrapItem>
                 })}
