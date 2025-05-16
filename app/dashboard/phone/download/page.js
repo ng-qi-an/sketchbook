@@ -9,7 +9,7 @@ export default function Download(){
     const [imageBlob, setImageBlob] = useState(null)
 
     useEffect(()=>{
-        fetch(`https://sketchbook.patstify.com/getPhoto/${searchQuery.get('photoID')}`)
+        fetch(`https://api.ngqian.dev/sketchbook/getPhoto/${searchQuery.get('photoID')}`)
             .then(response => response.blob())
             .then(blob => {
                 setImageBlob(blob)
